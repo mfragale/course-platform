@@ -16,7 +16,7 @@ export const PurchaseTable = pgTable("purchases", {
   pricePaidInCents: integer().notNull(),
   productDetails: jsonb()
     .notNull()
-    .$type<{ name: string; description: string; imageUrl: string }>(),
+    .$type<{ courseProducts: any; name: string; description: string; imageUrl: string }>(),
   userId: uuid()
     .notNull()
     .references(() => UserTable.id, { onDelete: "restrict" }),

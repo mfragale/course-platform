@@ -144,7 +144,7 @@ async function getUserCourses(userId: string) {
       lessonsComplete: countDistinct(UserLessonCompleteTable.lessonId),
     })
     .from(CourseTable)
-    .leftJoin(
+    .innerJoin(
       UserCourseAccessTable,
       and(
         eq(UserCourseAccessTable.courseId, CourseTable.id),
@@ -169,6 +169,7 @@ async function getUserCourses(userId: string) {
         eq(UserLessonCompleteTable.userId, userId)
       )
     )
+    .where(eq(UserCourseAccessTable.userId, userId))
     .orderBy(CourseTable.name)
     .groupBy(CourseTable.id)
 
